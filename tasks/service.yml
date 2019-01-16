@@ -1,0 +1,34 @@
+- name: Check config file exists
+  stat:
+    path: "{{ zookeeper_conf }}"
+  register: conf
+
+- name: Create default conf
+  template:
+      src: zookeeper.cfg.j2
+      dest: "{{ zookeeper_conf }}"
+      mode: 0444
+  when: conf.stat.exists is not defined or not conf.stat.exists or zookeeper_conf_force
+  notify: restart zookeeper
+
+- name: Ensure myid is set
+  template:
+    src: myid
+    dest: "{{ zookeeper_workdir }}/myid"
+  notify: restart zookeeper
+  
+- name: Create zookeeper service file
+  template: 
+      src: zookeeper.service.j2
+      dest: /etc/systemd/system/zookeeper.service
+      mode: 0444
+  notify: restart zookeeper
+
+- name: Systemd changes
+  systemd:
+      daemon_reload: yes
+      enabled: yes
+      state: started
+      name: zookeeper
+
+- meta: flush_handlers

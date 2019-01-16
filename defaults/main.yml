@@ -1,0 +1,19 @@
+rolename: zookeper
+zookeeper_version: 3.4.12
+zookeeper_unarchive_prefix: /opt
+zookeeper_version_target: "etcd Version: {{ etcd_version }}"
+zookeeper_link: "http://apache-mirror.rbc.ru/pub/apache/zookeeper/zookeeper-{{ zookeeper_version }}/zookeeper-{{ zookeeper_version }}.tar.gz"
+zookeeper_workdir: /var/lib/zookeeper
+zookeeper_conf: /etc/zookeeper/zookeeper.cfg
+zookeeper_conf_force: False
+zookeeper_sha1: a75bb657b4a27f20ca8c247ec3f1292bc2037b9b
+zookeeper_tick_time: 2000
+zookeeper_client_port: 2181
+zookeeper_maxClientCnxns: 50
+#zookeeper_hosts:
+#  - host: centos01
+#    id: 0
+#  - host: centos02
+#    id: 1
+#  - host: centos03
+#    id: 2

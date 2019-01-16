@@ -1,0 +1,19 @@
+---
+
+- name: Check binary file sha
+  stat:
+    path: "{{ zookeeper_unarchive_prefix }}/zookeeper-{{ zookeeper_version }}/zookeeper-{{ zookeeper_version }}.jar"
+    checksum_algorithm: sha1
+  register: zoo_jar 
+
+- unarchive:
+    src: "{{ zookeeper_link }}"
+    dest: "{{ zookeeper_unarchive_prefix }}"
+    remote_src: True
+  when: zoo_jar.stat.checksum is not defined or zoo_jar.stat.checksum != zookeeper_sha1
+
+- file:
+   path: /etc/zookeeper
+   src: "{{ zookeeper_unarchive_prefix }}/zookeeper-{{ zookeeper_version }}/conf"
+   state: link
+

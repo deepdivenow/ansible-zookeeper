@@ -1,0 +1,20 @@
+---
+
+- name: create zookeeper group
+  group: name=zookeeper  state=present
+
+- name: Create Zookeeper user
+  user:
+      name: zookeeper
+      home: "{{ zookeeper_workdir }}"
+      state: present
+      group: zookeeper
+
+- name: Change user dir permissions
+  file: 
+      path: "{{ zookeeper_workdir }}"
+      state: directory
+      mode: 0700
+      owner: zookeeper
+      group: zookeeper
+
