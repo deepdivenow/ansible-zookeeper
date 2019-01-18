@@ -19,7 +19,7 @@ clientPort={{ zookeeper_client_port }}
 {% if server.host == inventory_hostname %}
 server.{{server.id}}=0.0.0.0:2888:3888
 {% else %}
-server.{{server.id}}={{server.host}}:2888:3888
+server.{{server.id}}={{hostvars[server.host]['ansible_default_ipv4']['address']}}:2888:3888
 {% endif %}
 {% else %}
 {% if server == inventory_hostname %}
