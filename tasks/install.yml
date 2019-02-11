@@ -16,4 +16,3 @@
    path: /etc/zookeeper
    src: "{{ zookeeper_unarchive_prefix }}/zookeeper-{{ zookeeper_version }}/conf"
    state: link
-

@@ -8,6 +8,9 @@ After=network.target
 Type=forking
 User=zookeeper
 Group=zookeeper
+{% if zookeeper_exporter_enable %}
+Environment='SERVER_JVMFLAGS=-javaagent:{{ jmx_exporter_dir }}/jmx_prometheus_javaagent.jar={{ zookeeper_exporter_port }}:{{ jmx_exporter_dir }}/zookeeper_metrics.yml'
+{% endif %}
 ExecStart={{ zookeeper_unarchive_prefix }}/zookeeper-{{ zookeeper_version }}/bin/zkServer.sh start {{ zookeeper_conf }}
 ExecStop={{ zookeeper_unarchive_prefix }}/zookeeper-{{ zookeeper_version }} stop {{ zookeeper_conf }}
 ExecReload={{ zookeeper_unarchive_prefix }}/zookeeper-{{ zookeeper_version }} restart {{ zookeeper_conf }}

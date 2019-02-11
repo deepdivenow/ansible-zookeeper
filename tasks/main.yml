@@ -1,5 +1,13 @@
 
 - import_tasks: install.yml
 - import_tasks: user.yml
+- include_role:
+    name: jmx-exporter
+  vars:
+    jmx_exporter_service: 'zookeeper'
+    jmx_exporter_port: "{{ zookeeper_exporter_port }}"
+  when: zookeeper_exporter_enable
+
+#jmx_exporter_team:
 - import_tasks: service.yml
 
