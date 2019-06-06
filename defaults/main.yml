@@ -1,7 +1,7 @@
 rolename: zookeper
 zookeeper_exporter_enable: False
 zookeeper_exporter_port: 9141
-zookeeper_version: 3.4.12
+zookeeper_version: 3.4.14
 zookeeper_unarchive_prefix: /opt
 zookeeper_version_target: "etcd Version: {{ etcd_version }}"
 zookeeper_link: "http://apache-mirror.rbc.ru/pub/apache/zookeeper/zookeeper-{{ zookeeper_version }}/zookeeper-{{ zookeeper_version }}.tar.gz"
